@@ -1,0 +1,38 @@
+<mat-card class="search-card mt-5">
+  <mat-card-header>
+    <mat-card-title><h3>GitHub Repository Finder</h3></mat-card-title>
+    <mat-card-subtitle
+      >Digite o nome de uma organização do GitHub para encontrar os repositórios
+      dela</mat-card-subtitle
+    >
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="formSearch" (ngSubmit)="onSearch()">
+      <div class="content">
+        <mat-form-field>
+          <span matPrefix>https://github.com/</span>
+          <input
+            matInput
+            placeholder="org"
+            color="primary"
+            formControlName="searchInput"
+          />
+          <mat-error>
+            É obrigatório o preenchimento deste campo
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">
+          Pesquisar
+          <mat-icon *ngIf="!submitted">search</mat-icon>
+          <img
+            src="assets/images/Ripple-1s-200px.gif"
+            width="24px"
+            height="24px"
+            *ngIf="submitted"
+          />
+        </button>
+      </div>
+      <!-- /.content -->
+    </form>
+  </mat-card-content>
+</mat-card>
