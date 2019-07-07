@@ -23,10 +23,9 @@ export class GithubService {
       );
   }
 
-  getOrganization(org: string): Promise<Organization> {
+  getOrganization(org: string): Observable<Organization> {
     return this.http
-      .get<Organization>(`${this.URI}/orgs/${org}`, { headers: this.headers })
-      .toPromise();
+      .get<Organization>(`${this.URI}/orgs/${org}`, { headers: this.headers });
   }
 
 }

@@ -14,3 +14,13 @@
 .org-information {
   margin-bottom: 20px;
 }
+
+h2 {
+  color: $text;
+  font-size: 30px;
+}
+
+h3,
+p {
+  color: $text;
+}

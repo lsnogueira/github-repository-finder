@@ -19,11 +19,11 @@ export interface Organization {
   is_verified?: boolean;
   has_organization_projects?: boolean;
   has_repository_projects?: boolean;
-  public_repos?: number;
+  public_repos: number;
   public_gists?: number;
   followers?: number;
   following?: number;
-  html_url?: string;
+  html_url: string;
   created_at?: string;
   type?: string;
   total_private_repos?: number;
