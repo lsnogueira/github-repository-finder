@@ -8,6 +8,7 @@ app-repository {
 $spacing: 20px;
 
 .github-card {
+  position: relative;
   display: block;
   box-sizing: border-box;
   border: 1px solid $gray;
@@ -17,20 +18,17 @@ $spacing: 20px;
   text-decoration: none;
   font-size: 13px;
   flex: 1;
-  min-width: 250px;
+  height: 88%;
   background-color: #fff;
+  cursor: pointer;
 
   > h3 {
     margin-top: 0;
     color: $blue-github;
     font-size: 15px;
   }
-}
 
-.github-card__meta {
-  margin-right: $spacing;
-
-  > i {
-    font-size: 16px;
+  .language-icon {
+    color: $blue-github;
   }
 }

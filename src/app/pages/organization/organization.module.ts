@@ -7,6 +7,7 @@ import { RepositoryComponent } from './repository/repository.component';
 import { OrganizationComponent } from './organization/organization.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatRippleModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MatInputModule } from '@angular/material/input';
     CommonModule,
     OrganizationRoutingModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatRippleModule
   ]
 })
 export class OrganizationModule { }

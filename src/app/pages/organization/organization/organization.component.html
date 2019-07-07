@@ -19,9 +19,7 @@
       <h2>
         {{ org?.name }}
         <span class="smallname">
-          (@<a [href]="org?.html_url" target="_blank"
-            >{{ org?.login }}</a
-          >)
+          (@<a [href]="org?.html_url" target="_blank">{{ org?.login }} </a>)
         </span>
         <!-- ./smallname -->
       </h2>
@@ -35,9 +33,10 @@
   </div>
   <!-- /.row -->
   <div class="row">
-    <div *ngFor="let rep of repos" class="col-lg-3">
-      <app-repository></app-repository>
+    <div *ngFor="let rep of repos" class="col-lg-3 col-md-6 col-12">
+      <app-repository [repository]="rep"></app-repository>
     </div>
+    <!-- /.col-lg-3 col-md-6 col-12 -->
   </div>
   <div *ngIf="!isPageLoad" class="general-loading"></div>
 </div>
