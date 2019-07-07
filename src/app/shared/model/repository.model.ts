@@ -4,7 +4,7 @@ export interface Repository {
   name: string;
   full_name: string;
   private: boolean;
-  owner?: {
+  owner: {
     login: string;
     id?: number;
     node_id?: string;

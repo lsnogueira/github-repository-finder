@@ -16,9 +16,9 @@ export class GithubService {
 
   constructor(private http: HttpClient) {}
 
-  getRepositories(org: string): Observable<Repository> {
+  getRepositories(org: string): Observable<Repository[]> {
     return this.http
-      .get<Repository>(
+      .get<Repository[]>(
         `${this.URI}/orgs/${org}/repos?type=public`, { headers: this.headers }
       );
   }
@@ -26,6 +26,18 @@ export class GithubService {
   getOrganization(org: string): Observable<Organization> {
     return this.http
       .get<Organization>(`${this.URI}/orgs/${org}`, { headers: this.headers });
+  }
+
+  getCommits(
+    owner: string,
+    repo: string,
+    branch = 'master'
+  ): Promise<any> {
+    return this.http
+      .get<any>(`${this.URI}/repos/${owner}/${repo}/commits?sha=${branch}`, {
+        headers: this.headers
+      })
+      .toPromise();
   }
 
 }

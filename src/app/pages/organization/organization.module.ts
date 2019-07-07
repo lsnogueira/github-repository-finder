@@ -8,19 +8,23 @@ import { OrganizationComponent } from './organization/organization.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatRippleModule } from '@angular/material';
+import { CommitListComponent } from './commit-list/commit-list.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
     TopNavComponent,
     RepositoryComponent,
-    OrganizationComponent
+    OrganizationComponent,
+    CommitListComponent
   ],
   imports: [
     CommonModule,
     OrganizationRoutingModule,
     MatIconModule,
     MatInputModule,
-    MatRippleModule
+    MatRippleModule,
+    SharedModule
   ]
 })
 export class OrganizationModule { }

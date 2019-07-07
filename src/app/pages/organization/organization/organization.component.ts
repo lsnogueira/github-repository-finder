@@ -27,14 +27,20 @@ export class OrganizationComponent implements OnInit, OnDestroy {
     const orgRequest = this.ghService.getOrganization(orgName);
     const reposRequest = this.ghService.getRepositories(orgName);
 
-    forkJoin([orgRequest, reposRequest])
-      .subscribe(res => {
-        this.org = res[0];
-        this.repos = res[1];
-        console.log('org', this.org);
-        console.log('repos', this.repos);
-        this.isPageLoad = true;
-      });
+    // forkJoin([orgRequest, reposRequest])
+    //   .subscribe(res => {
+    //     this.org = res[0];
+    //     this.repos = res[1];
+    //     this.isPageLoad = true;
+    //   });
+
+    this.subscription.add(
+      this.ghService.getOrganization(orgName)
+        .subscribe(res => {
+          this.org = res;
+          this.isPageLoad = true;
+        })
+    );
   }
 
   ngOnDestroy() {

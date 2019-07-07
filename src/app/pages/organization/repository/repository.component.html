@@ -1,17 +1,29 @@
-<div
-  matRipple
-  [matRippleUnbounded]="unbounded"
-  matRippleColor="rgba(64, 120, 192, 0.3)"
-  class="github-card"
->
-  <h3>{{ repository?.name }}</h3>
-  <p>{{ repository?.description }}</p>
-  <span *ngIf="repository?.language">
-    <span class="language-icon">
-      ●
-    </span>
-    <!-- /.language-icon -->
-    {{ repository?.language }}
-  </span>
+<div class="container">
+  <div class="row content-section">
+    <div
+      class="col-lg-3 col-md-6 col-12"
+      *ngFor="let repository of repositories"
+    >
+      <div
+        matRipple
+        matRippleColor="rgba(64, 120, 192, 0.3)"
+        class="github-card"
+        (click)="goList()"
+      >
+        <h3>{{ repository?.name }}</h3>
+        <p>{{ repository?.description }}</p>
+        <span *ngIf="repository?.language">
+          <span class="language-icon">
+            ●
+          </span>
+          <!-- /.language-icon -->
+          {{ repository?.language }}
+        </span>
+      </div>
+      <!-- /.github-card -->
+    </div>
+    <!-- /.col-lg-3 col-md-6 col-12 -->
+  </div>
+  <!-- /.row content-section -->
 </div>
-<!-- /.github-card -->
+<!-- /.container -->

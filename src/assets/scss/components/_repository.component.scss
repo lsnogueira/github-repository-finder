@@ -7,6 +7,13 @@ app-repository {
 
 $spacing: 20px;
 
+.content-section {
+  > .col,
+  > [class*='col-'] {
+    padding-left: 0;
+  }
+}
+
 .github-card {
   position: relative;
   display: block;
