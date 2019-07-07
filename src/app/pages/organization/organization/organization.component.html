@@ -1,6 +1,6 @@
 <app-top-nav></app-top-nav>
 <div class="container">
-  <div class="row">
+  <div *ngIf="org" class="row">
     <div class="col-lg-2 org-information">
       <div class="avatar">
         <a [href]="org?.html_url" target="_blank">
@@ -35,7 +35,9 @@
   </div>
   <!-- /.row -->
   <div class="row">
-    <app-repository></app-repository>
+    <div *ngFor="let rep of repos" class="col-lg-3">
+      <app-repository></app-repository>
+    </div>
   </div>
   <div *ngIf="!isPageLoad" class="general-loading"></div>
 </div>
