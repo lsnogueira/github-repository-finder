@@ -7,10 +7,13 @@ import { RepositoryComponent } from './repository/repository.component';
 import { OrganizationComponent } from './organization/organization.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatRippleModule } from '@angular/material';
+import { MatRippleModule, MatButtonModule } from '@angular/material';
 import { CommitListComponent } from './commit-list/commit-list.component';
 import { SharedModule } from '../../shared/shared.module';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatInputModule,
     MatRippleModule,
     MatExpansionModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatPaginatorModule,
     SharedModule
   ]
 })
