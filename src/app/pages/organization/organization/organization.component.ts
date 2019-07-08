@@ -24,15 +24,6 @@ export class OrganizationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const orgName = this.activatedRoute.snapshot.params.org;
-    const orgRequest = this.ghService.getOrganization(orgName);
-    const reposRequest = this.ghService.getRepositories(orgName);
-
-    // forkJoin([orgRequest, reposRequest])
-    //   .subscribe(res => {
-    //     this.org = res[0];
-    //     this.repos = res[1];
-    //     this.isPageLoad = true;
-    //   });
 
     this.subscription.add(
       this.ghService.getOrganization(orgName)

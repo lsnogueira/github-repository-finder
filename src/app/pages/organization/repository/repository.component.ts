@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Repository } from '../../../shared/model/repository.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GithubService } from '../../../shared/service/github.service';
@@ -10,7 +10,7 @@ import { SnackbarService } from '../../../shared/service/snackbar.service';
   templateUrl: './repository.component.html',
   styleUrls: ['../../../../assets/scss/components/_repository.component.scss']
 })
-export class RepositoryComponent implements OnInit {
+export class RepositoryComponent implements OnInit, OnDestroy {
   repositories: Repository[];
 
   private orgName: string;
@@ -41,5 +41,11 @@ export class RepositoryComponent implements OnInit {
     );
   }
 
-  goList(): void {}
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  goList(repository: Repository): void {
+    this.router.navigate([`${this.orgName}`, `${repository.name}`]);
+  }
 }

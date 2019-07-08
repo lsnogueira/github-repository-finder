@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRippleModule } from '@angular/material';
 import { CommitListComponent } from './commit-list/commit-list.component';
 import { SharedModule } from '../../shared/shared.module';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SharedModule } from '../../shared/shared.module';
     MatIconModule,
     MatInputModule,
     MatRippleModule,
+    MatExpansionModule,
     SharedModule
   ]
 })
-export class OrganizationModule { }
+export class OrganizationModule {}
