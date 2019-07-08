@@ -18,3 +18,12 @@ mat-panel-title {
 mat-panel-description {
   padding-top: 20px;
 }
+
+.author-input {
+  width: 100%;
+  display: inline-block;
+  font-size: 15px;
+  text-align: right;
+  padding-right: 10px;
+  color: $placeholder;
+}

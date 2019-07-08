@@ -1,15 +1,36 @@
 <div class="container">
   <mat-toolbar>
-    <button mat-button color="primary" [matMenuTriggerFor]="branches">Branches</button>
+    <button mat-button color="primary" [matMenuTriggerFor]="branches">
+      Branches
+    </button>
     <mat-menu #branches="matMenu">
       <button mat-menu-item>master</button>
       <button mat-menu-item>develop</button>
     </mat-menu>
-    <button mat-button color="primary" [matMenuTriggerFor]="author">Author</button>
-    <mat-menu #author="matMenu">
-      <button mat-menu-item>lsnogueira</button>
-      <button mat-menu-item>wizardbr</button>
-    </mat-menu>
+    <div class="author-input">
+      <form [formGroup]="formAuthor" (ngSubmit)="searchAuthor()">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="author"
+            color="primary"
+            formControlName="authorInput"
+            [(ngModel)]="value"
+          />
+          <button
+            mat-button
+            *ngIf="value"
+            matSuffix
+            mat-icon-button
+            aria-label="Pesquisar"
+            type="submit"
+          >
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </div>
+    <!-- /.author-input -->
   </mat-toolbar>
   <div>
     <mat-accordion>
@@ -27,7 +48,6 @@
       </mat-expansion-panel>
     </mat-accordion>
   </div>
-  <mat-paginator [length]="100"
-              [pageSize]="30">
-</mat-paginator>
+  <mat-paginator [length]="100" [pageSize]="30"> </mat-paginator>
 </div>
+<!-- /.container -->
