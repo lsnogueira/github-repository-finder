@@ -75,7 +75,9 @@ export class CommitListComponent implements OnInit, OnDestroy {
           this.linkPages = this.getLinkPages(this.linkHeaders);
         },
         rej => {
-          console.log('af', rej);
+          this.snackBarService.open(
+            'Não foi possível carregar os commits'
+          );
         }
       )
     );
@@ -85,14 +87,15 @@ export class CommitListComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.ghService.getNewCommitPage(this.linkPages.next).subscribe(
         res => {
-          console.log(res.body);
           this.commits = res.body;
           this.linkHeaders = res.headers.get('Link');
           this.pages = this.getNumberPages(this.linkHeaders);
           this.linkPages = this.getLinkPages(this.linkHeaders);
         },
         rej => {
-          console.log('af', rej);
+          this.snackBarService.open(
+            'Não foi possível carregar os commits'
+          );
         }
       )
     );
@@ -109,7 +112,9 @@ export class CommitListComponent implements OnInit, OnDestroy {
           this.linkPages = this.getLinkPages(this.linkHeaders);
         },
         rej => {
-          console.log('af', rej);
+          this.snackBarService.open(
+            'Não foi possível carregar a branch'
+          );
         }
       )
     );

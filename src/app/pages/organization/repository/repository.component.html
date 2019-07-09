@@ -1,4 +1,8 @@
 <div class="container">
+  <div class="row col-12 mb-4">
+    <h3>Repos List:</h3>
+  </div>
+  <!-- /.col-12 mb-4 -->
   <div class="row content-section">
     <div
       class="col-lg-3 col-md-6 col-12"
@@ -9,6 +13,7 @@
         matRippleColor="rgba(64, 120, 192, 0.3)"
         class="github-card"
         (click)="goList(repository)"
+        @slideFadeState
       >
         <h3>{{ repository?.name }}</h3>
         <p>{{ repository?.description }}</p>

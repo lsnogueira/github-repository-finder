@@ -1,10 +1,18 @@
 <div class="container">
+  <div class="row col-12 mb-4">
+    <h3>Commit List:</h3>
+  </div>
+  <!-- /.col-12 mb-4 -->
   <mat-toolbar>
     <button mat-button color="primary" [matMenuTriggerFor]="menuBranches">
       Branches
     </button>
     <mat-menu #menuBranches="matMenu">
-      <button *ngFor="let branch of branches" mat-menu-item (click)="changeBranch(branch)">
+      <button
+        *ngFor="let branch of branches"
+        mat-menu-item
+        (click)="changeBranch(branch)"
+      >
         {{ branch?.name }}
       </button>
     </mat-menu>
@@ -48,7 +56,7 @@
           </mat-panel-title>
           <mat-panel-description>
             <div class="text-right w-100">
-              {{ cmt.commit.author?.date }}
+              {{ cmt.commit.author?.date | date: 'dd/MM/yyyy' }}
             </div>
           </mat-panel-description>
         </mat-expansion-panel-header>
@@ -61,6 +69,11 @@
       </mat-expansion-panel>
     </mat-accordion>
   </div>
-  <mat-paginator [length]="pages.last*30" [pageSize]="30" (page)="changePage($event)"> </mat-paginator>
+  <mat-paginator
+    [length]="pages.last * 30"
+    [pageSize]="30"
+    (page)="changePage($event)"
+  >
+  </mat-paginator>
 </div>
 <!-- /.container -->

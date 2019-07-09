@@ -4,14 +4,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { GithubService } from '../../../shared/service/github.service';
 import { Subscription } from 'rxjs';
 import { SnackbarService } from '../../../shared/service/snackbar.service';
+import { slideStateTrigger, slideFadeStateTrigger } from '../../../shared/animations';
 
 @Component({
   selector: 'app-repository',
   templateUrl: './repository.component.html',
-  styleUrls: ['../../../../assets/scss/components/_repository.component.scss']
+  styleUrls: ['../../../../assets/scss/components/_repository.component.scss'],
+  animations: [slideFadeStateTrigger]
 })
 export class RepositoryComponent implements OnInit, OnDestroy {
   repositories: Repository[];
+  loaded = false;
 
   private orgName: string;
   private subscription = new Subscription();
@@ -39,6 +42,10 @@ export class RepositoryComponent implements OnInit, OnDestroy {
           }
         )
     );
+
+    setTimeout(() => {
+      this.loaded = true;
+    }, 1000);
   }
 
   ngOnDestroy() {
