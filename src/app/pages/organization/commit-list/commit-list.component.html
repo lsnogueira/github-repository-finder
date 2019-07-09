@@ -1,11 +1,12 @@
 <div class="container">
   <mat-toolbar>
-    <button mat-button color="primary" [matMenuTriggerFor]="branches">
+    <button mat-button color="primary" [matMenuTriggerFor]="menuBranches">
       Branches
     </button>
-    <mat-menu #branches="matMenu">
-      <button mat-menu-item>master</button>
-      <button mat-menu-item>develop</button>
+    <mat-menu #menuBranches="matMenu">
+      <button *ngFor="let branch of branches" mat-menu-item (click)="changeBranch(branch)">
+        {{ branch?.name }}
+      </button>
     </mat-menu>
     <div class="author-input">
       <form [formGroup]="formAuthor" (ngSubmit)="searchAuthor()">
@@ -34,20 +35,32 @@
   </mat-toolbar>
   <div>
     <mat-accordion>
-      <mat-expansion-panel>
+      <mat-expansion-panel *ngFor="let cmt of commits">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <p class="title">add organization layout</p>
+            <p class="title">
+              {{
+                cmt.commit.message?.length > titleLength
+                  ? (cmt.commit.message | slice: 0:titleLength) + '...'
+                  : cmt.commit.message
+              }}
+            </p>
           </mat-panel-title>
           <mat-panel-description>
-            24/12/2018
+            <div class="text-right w-100">
+              {{ cmt.commit.author?.date }}
+            </div>
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <p class="author">Author: <i>lsnogueira</i></p>
-        <p class="hash">Hash: <i>abcde235HoJKXasdf124</i></p>
+        <p class="author">
+          Author: <i>{{ cmt.author?.login }}</i>
+        </p>
+        <p class="hash">
+          Hash: <i>{{ cmt.sha }}</i>
+        </p>
       </mat-expansion-panel>
     </mat-accordion>
   </div>
-  <mat-paginator [length]="100" [pageSize]="30"> </mat-paginator>
+  <mat-paginator [length]="pages.last*30" [pageSize]="30" (page)="changePage($event)"> </mat-paginator>
 </div>
 <!-- /.container -->
