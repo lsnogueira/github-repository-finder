@@ -70,7 +70,7 @@
     </mat-accordion>
   </div>
   <mat-paginator
-    [length]="pages.last * 30"
+    [length]="pages.last ? pages.last * 30 : 30"
     [pageSize]="30"
     (page)="changePage($event)"
   >
