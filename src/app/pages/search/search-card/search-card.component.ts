@@ -1,14 +1,7 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  Output,
-  EventEmitter
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GithubService } from '../../../shared/service/github.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { Organization } from '../../../shared/model/organization.model';
 import { SnackbarService } from '../../../shared/service/snackbar.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -18,8 +11,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['../../../../assets/scss/components/_search-card.component.scss']
 })
 export class SearchCardComponent implements OnInit, OnDestroy {
-  @Output() organization = new EventEmitter<Organization>();
-
   submitted: boolean;
   formSearch: FormGroup;
 
@@ -51,11 +42,10 @@ export class SearchCardComponent implements OnInit, OnDestroy {
 
     if (org) {
       this.submitted = true;
-      this.ghService.getOrganization(org)
-        .subscribe(
+      this.subscription.add(
+        this.ghService.getOrganization(org).subscribe(
           res => {
             this.router.navigate([`${res.login}`]);
-            this.organization.emit(res);
           },
           rej => {
             this.submitted = false;
@@ -65,7 +55,8 @@ export class SearchCardComponent implements OnInit, OnDestroy {
             }
             this.snackBarService.open('Um erro inesperado aconteceu');
           }
-        );
+        )
+      );
     }
   }
 }
