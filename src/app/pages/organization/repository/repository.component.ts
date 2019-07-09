@@ -4,14 +4,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { GithubService } from '../../../shared/service/github.service';
 import { Subscription } from 'rxjs';
 import { SnackbarService } from '../../../shared/service/snackbar.service';
-import { slideFadeStateTrigger } from '../../../shared/animations';
+import { listStateTrigger } from '../../../shared/animations';
 import { ErrorMessages } from '../../../shared/enum/errors.enum';
 
 @Component({
   selector: 'app-repository',
   templateUrl: './repository.component.html',
   styleUrls: ['../../../../assets/scss/components/_repository.component.scss'],
-  animations: [slideFadeStateTrigger]
+  animations: [listStateTrigger]
 })
 export class RepositoryComponent implements OnInit, OnDestroy {
   repositories: Repository[];
