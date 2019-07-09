@@ -4,7 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { GithubService } from '../../../shared/service/github.service';
 import { Subscription } from 'rxjs';
 import { SnackbarService } from '../../../shared/service/snackbar.service';
-import { slideStateTrigger, slideFadeStateTrigger } from '../../../shared/animations';
+import { slideFadeStateTrigger } from '../../../shared/animations';
+import { ErrorMessages } from '../../../shared/enum/errors.enum';
 
 @Component({
   selector: 'app-repository',
@@ -14,7 +15,6 @@ import { slideStateTrigger, slideFadeStateTrigger } from '../../../shared/animat
 })
 export class RepositoryComponent implements OnInit, OnDestroy {
   repositories: Repository[];
-  loaded = false;
 
   private orgName: string;
   private subscription = new Subscription();
@@ -36,16 +36,10 @@ export class RepositoryComponent implements OnInit, OnDestroy {
             this.repositories = res;
           },
           () => {
-            this.snackBarService.open(
-              'Não foi possível carregar os repositórios'
-            );
+            this.snackBarService.open(ErrorMessages.LOAD_REPOS);
           }
         )
     );
-
-    setTimeout(() => {
-      this.loaded = true;
-    }, 1000);
   }
 
   ngOnDestroy() {

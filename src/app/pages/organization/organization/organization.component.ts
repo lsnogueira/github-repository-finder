@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GithubService } from '../../../shared/service/github.service';
-import { Subscription, forkJoin } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { Organization } from '../../../shared/model/organization.model';
 import { Repository } from '../../../shared/model/repository.model';
+import { SnackbarService } from '../../../shared/service/snackbar.service';
+import { ErrorMessages } from '../../../shared/enum/errors.enum';
 
 @Component({
   selector: 'app-organization',
@@ -19,7 +21,8 @@ export class OrganizationComponent implements OnInit, OnDestroy {
 
   constructor(
     private ghService: GithubService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private snackBarService: SnackbarService
   ) {}
 
   ngOnInit() {
@@ -30,6 +33,9 @@ export class OrganizationComponent implements OnInit, OnDestroy {
         .subscribe(res => {
           this.org = res;
           this.isPageLoad = true;
+        },
+        () => {
+          this.snackBarService.open(ErrorMessages.UNEXPECTED_ERROR);
         })
     );
   }

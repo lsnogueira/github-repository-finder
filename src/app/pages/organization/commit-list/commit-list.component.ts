@@ -6,6 +6,7 @@ import { SnackbarService } from '../../../shared/service/snackbar.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Branch } from '../../../shared/model/branch.model';
 import { Commit } from '../../../shared/model/commit.model';
+import { ErrorMessages } from '../../../shared/enum/errors.enum';
 
 @Component({
   selector: 'app-commit-list',
@@ -61,7 +62,7 @@ export class CommitListComponent implements OnInit, OnDestroy {
           this.branches = [...res];
         },
         () => {
-          this.snackBarService.open('Não foi possível carregar as branches');
+          this.snackBarService.open(ErrorMessages.LOAD_BRANCHES);
         }
       )
     );
@@ -74,10 +75,8 @@ export class CommitListComponent implements OnInit, OnDestroy {
           this.pages = this.getNumberPages(this.linkHeaders);
           this.linkPages = this.getLinkPages(this.linkHeaders);
         },
-        rej => {
-          this.snackBarService.open(
-            'Não foi possível carregar os commits'
-          );
+        () => {
+          this.snackBarService.open(ErrorMessages.LOAD_COMMITS);
         }
       )
     );
@@ -92,10 +91,8 @@ export class CommitListComponent implements OnInit, OnDestroy {
           this.pages = this.getNumberPages(this.linkHeaders);
           this.linkPages = this.getLinkPages(this.linkHeaders);
         },
-        rej => {
-          this.snackBarService.open(
-            'Não foi possível carregar os commits'
-          );
+        () => {
+          this.snackBarService.open(ErrorMessages.LOAD_COMMITS);
         }
       )
     );
@@ -111,10 +108,8 @@ export class CommitListComponent implements OnInit, OnDestroy {
           this.pages = this.getNumberPages(this.linkHeaders);
           this.linkPages = this.getLinkPages(this.linkHeaders);
         },
-        rej => {
-          this.snackBarService.open(
-            'Não foi possível carregar a branch'
-          );
+        () => {
+          this.snackBarService.open(ErrorMessages.LOAD_BRANCH_COMMITS);
         }
       )
     );

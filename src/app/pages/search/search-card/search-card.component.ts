@@ -1,17 +1,11 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  Output,
-  EventEmitter
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GithubService } from '../../../shared/service/github.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { Organization } from '../../../shared/model/organization.model';
 import { SnackbarService } from '../../../shared/service/snackbar.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { slideDownStateTrigger, fadeStateTrigger } from '../../../shared/animations';
+import { fadeStateTrigger } from '../../../shared/animations';
+import { ErrorMessages } from '../../../shared/enum/errors.enum';
 
 @Component({
   selector: 'app-search-card',
@@ -20,7 +14,6 @@ import { slideDownStateTrigger, fadeStateTrigger } from '../../../shared/animati
   animations: [fadeStateTrigger]
 })
 export class SearchCardComponent implements OnInit, OnDestroy {
-
   submitted: boolean;
   formSearch: FormGroup;
   loaded = false;
@@ -56,20 +49,19 @@ export class SearchCardComponent implements OnInit, OnDestroy {
 
     if (org && !this.submitted) {
       this.submitted = true;
-      this.ghService.getOrganization(org)
-        .subscribe(
-          res => {
-            this.router.navigate([`${res.login}`]);
-          },
-          rej => {
-            this.submitted = false;
-            if (rej.status === 404) {
-              this.snackBarService.open('Organização não encontrada');
-              return;
-            }
-            this.snackBarService.open('Um erro inesperado aconteceu');
+      this.ghService.getOrganization(org).subscribe(
+        res => {
+          this.router.navigate([`${res.login}`]);
+        },
+        rej => {
+          this.submitted = false;
+          if (rej.status === 404) {
+            this.snackBarService.open(ErrorMessages.NOT_FOUND_ORG);
+            return;
           }
-        );
+          this.snackBarService.open(ErrorMessages.UNEXPECTED_ERROR);
+        }
+      );
     }
   }
 }
