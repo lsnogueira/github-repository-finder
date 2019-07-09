@@ -13,7 +13,8 @@
       class="form-control"
       placeholder="Organization"
       aria-label="Organization"
+      #search
     />
-    <mat-icon>search</mat-icon>
+    <mat-icon (click)="onSearch(search.value)">search</mat-icon>
   </div>
 </nav>
