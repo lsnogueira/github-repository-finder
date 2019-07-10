@@ -43,7 +43,10 @@
   </mat-toolbar>
   <div>
     <mat-accordion>
-      <mat-expansion-panel *ngFor="let cmt of commits">
+      <mat-expansion-panel
+        *ngFor="let cmt of commits"
+        [@slideFadeState]="commits?.length"
+      >
         <mat-expansion-panel-header>
           <mat-panel-title>
             <p class="title">
