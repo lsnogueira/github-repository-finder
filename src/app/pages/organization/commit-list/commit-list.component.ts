@@ -7,11 +7,13 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Branch } from '../../../shared/model/branch.model';
 import { Commit } from '../../../shared/model/commit.model';
 import { ErrorMessages } from '../../../shared/enum/errors.enum';
+import { slideFadeStateTrigger, slideDownStateTrigger } from '../../../shared/animations';
 
 @Component({
   selector: 'app-commit-list',
   templateUrl: './commit-list.component.html',
-  styleUrls: ['../../../../assets/scss/components/_commit-list.component.scss']
+  styleUrls: ['../../../../assets/scss/components/_commit-list.component.scss'],
+  animations: [slideFadeStateTrigger]
 })
 export class CommitListComponent implements OnInit, OnDestroy {
   formAuthor: FormGroup;
