@@ -4,15 +4,19 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { SnackbarService } from '../../../shared/service/snackbar.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { fadeStateTrigger } from '../../../shared/animations';
+import { ErrorMessages } from '../../../shared/enum/errors.enum';
 
 @Component({
   selector: 'app-search-card',
   templateUrl: './search-card.component.html',
-  styleUrls: ['../../../../assets/scss/components/_search-card.component.scss']
+  styleUrls: ['../../../../assets/scss/components/_search-card.component.scss'],
+  animations: [fadeStateTrigger]
 })
 export class SearchCardComponent implements OnInit, OnDestroy {
   submitted: boolean;
   formSearch: FormGroup;
+  loaded = false;
 
   private subscription = new Subscription();
 
@@ -24,13 +28,20 @@ export class SearchCardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.submitted = false;
-    this.formSearch = new FormGroup({
-      searchInput: new FormControl(null, { validators: [Validators.required] })
-    });
+    setTimeout(() => {
+      this.loaded = true;
+    }, 500);
+    this.createForm();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  createForm(): void {
+    this.formSearch = new FormGroup({
+      searchInput: new FormControl(null, { validators: [Validators.required] })
+    });
   }
 
   get form() {
@@ -40,22 +51,23 @@ export class SearchCardComponent implements OnInit, OnDestroy {
   onSearch(): void {
     const org = this.form.searchInput.value;
 
-    if (org) {
+    if (org && !this.submitted) {
       this.submitted = true;
       this.subscription.add(
-        this.ghService.getOrganization(org).subscribe(
-          res => {
-            this.router.navigate([`${res.login}`]);
-          },
-          rej => {
-            this.submitted = false;
-            if (rej.status === 404) {
-              this.snackBarService.open('Organização não encontrada :(');
-              return;
+        this.ghService.getOrganization(org)
+          .subscribe(
+            res => {
+              this.router.navigate([`${res.login}`]);
+            },
+            rej => {
+              this.submitted = false;
+              if (rej.status === 404) {
+                this.snackBarService.open(ErrorMessages.NOT_FOUND_ORG);
+                return;
+              }
+              this.snackBarService.open(ErrorMessages.UNEXPECTED_ERROR);
             }
-            this.snackBarService.open('Um erro inesperado aconteceu');
-          }
-        )
+          )
       );
     }
   }

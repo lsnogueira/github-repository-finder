@@ -4,11 +4,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { GithubService } from '../../../shared/service/github.service';
 import { Subscription } from 'rxjs';
 import { SnackbarService } from '../../../shared/service/snackbar.service';
+import { listStateTrigger } from '../../../shared/animations';
+import { ErrorMessages } from '../../../shared/enum/errors.enum';
 
 @Component({
   selector: 'app-repository',
   templateUrl: './repository.component.html',
-  styleUrls: ['../../../../assets/scss/components/_repository.component.scss']
+  styleUrls: ['../../../../assets/scss/components/_repository.component.scss'],
+  animations: [listStateTrigger]
 })
 export class RepositoryComponent implements OnInit, OnDestroy {
   repositories: Repository[];
@@ -25,20 +28,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.orgName = this.activatedRoute.snapshot.params.org;
-
-    this.subscription.add(
-      this.ghService.getRepositories(this.orgName)
-        .subscribe(
-          res => {
-            this.repositories = res;
-          },
-          () => {
-            this.snackBarService.open(
-              'Não foi possível carregar os repositórios'
-            );
-          }
-        )
-    );
+    this.initListener();
   }
 
   ngOnDestroy() {
@@ -47,5 +37,19 @@ export class RepositoryComponent implements OnInit, OnDestroy {
 
   goList(repository: Repository): void {
     this.router.navigate([`${this.orgName}`, `${repository.name}`]);
+  }
+
+  initListener(): void {
+    this.subscription.add(
+      this.ghService.getRepositories(this.orgName)
+        .subscribe(
+          res => {
+            this.repositories = res;
+          },
+          () => {
+            this.snackBarService.open(ErrorMessages.LOAD_REPOS);
+          }
+        )
+    );
   }
 }

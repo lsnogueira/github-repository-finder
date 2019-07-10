@@ -13,7 +13,7 @@ export class GithubService {
   private readonly URI = 'https://api.github.com';
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    Accept: 'application/vnd.github.v3+json'
+    'Accept': 'application/vnd.github.v3+json'
   });
 
   constructor(private http: HttpClient) {}
@@ -39,11 +39,15 @@ export class GithubService {
       });
   }
 
-  getBranches(owner: string, repo: string): Observable<HttpResponse<Branch[]>> {
+  getBranches(owner: string, repo: string): Observable<Branch[]> {
     return this.http
       .get<Branch[]>(
-        `${this.URI}/repos/${owner}/${repo}/branches`, {
-          observe: 'response'
-      });
+        `${this.URI}/repos/${owner}/${repo}/branches`, { headers: this.headers });
+  }
+
+  getNewCommitPage(pageURI: string): Observable<HttpResponse<Commit[]>> {
+    return this.http.get<Commit[]>(pageURI, {
+      observe: 'response'
+    });
   }
 }

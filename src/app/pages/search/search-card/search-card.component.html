@@ -1,4 +1,4 @@
-<mat-card class="search-card mt-5">
+<mat-card @fadeState class="search-card mt-5">
   <mat-card-header>
     <mat-card-title><h3>GitHub Repository Finder</h3></mat-card-title>
     <mat-card-subtitle
@@ -21,7 +21,11 @@
             É obrigatório o preenchimento deste campo
           </mat-error>
         </mat-form-field>
-        <button mat-raised-button color="primary" type="submit">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+        >
           Pesquisar
           <mat-icon *ngIf="!submitted">search</mat-icon>
           <img
