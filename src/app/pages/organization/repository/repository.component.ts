@@ -28,7 +28,18 @@ export class RepositoryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.orgName = this.activatedRoute.snapshot.params.org;
+    this.initListener();
+  }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  goList(repository: Repository): void {
+    this.router.navigate([`${this.orgName}`, `${repository.name}`]);
+  }
+
+  initListener(): void {
     this.subscription.add(
       this.ghService.getRepositories(this.orgName)
         .subscribe(
@@ -40,13 +51,5 @@ export class RepositoryComponent implements OnInit, OnDestroy {
           }
         )
     );
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
-  goList(repository: Repository): void {
-    this.router.navigate([`${this.orgName}`, `${repository.name}`]);
   }
 }

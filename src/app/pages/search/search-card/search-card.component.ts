@@ -31,13 +31,17 @@ export class SearchCardComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.loaded = true;
     }, 500);
-    this.formSearch = new FormGroup({
-      searchInput: new FormControl(null, { validators: [Validators.required] })
-    });
+    this.createForm();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  createForm(): void {
+    this.formSearch = new FormGroup({
+      searchInput: new FormControl(null, { validators: [Validators.required] })
+    });
   }
 
   get form() {

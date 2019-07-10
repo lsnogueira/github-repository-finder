@@ -22,7 +22,6 @@ export class TopNavComponent implements OnInit {
     if (searchValue) {
       this.ghService.getOrganization(searchValue).subscribe(
         res => {
-          console.log(res);
           this.router.navigate([`${res.login}`])
             .then(() => {
               location.reload();

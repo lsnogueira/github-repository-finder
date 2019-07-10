@@ -11,7 +11,7 @@
       <button
         *ngFor="let branch of branches"
         mat-menu-item
-        (click)="changeBranch(branch)"
+        (click)="changeBranch(branch.name)"
       >
         {{ branch?.name }}
       </button>
@@ -73,7 +73,7 @@
     </mat-accordion>
   </div>
   <mat-paginator
-    [length]="pages.last ? pages.last * 30 : 30"
+    [length]="pages?.last ? pages?.last * 30 : 30"
     [pageSize]="30"
     (page)="changePage($event)"
   >

@@ -26,6 +26,14 @@ export class OrganizationComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.initListener();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  initListener(): void {
     const orgName = this.activatedRoute.snapshot.params.org;
 
     this.subscription.add(
@@ -38,9 +46,5 @@ export class OrganizationComponent implements OnInit, OnDestroy {
           this.snackBarService.open(ErrorMessages.UNEXPECTED_ERROR);
         })
     );
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 }

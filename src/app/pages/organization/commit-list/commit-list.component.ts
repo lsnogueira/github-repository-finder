@@ -35,13 +35,9 @@ export class CommitListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.formAuthor = new FormGroup({
-      authorInput: new FormControl(null, {
-        validators: [Validators.minLength(3)]
-      })
-    });
     this.repoName = this.activatedRoute.snapshot.params.repo;
     this.titleLength = 40;
+    this.createForm();
     this.initListeners();
   }
 
@@ -51,7 +47,7 @@ export class CommitListComponent implements OnInit, OnDestroy {
 
   searchAuthor(): void {}
 
-  initListeners() {
+  initListeners(): void {
     this.subscription.add(
       this.activatedRoute.parent.params.subscribe(res => {
         this.orgName = res.org;
@@ -82,6 +78,14 @@ export class CommitListComponent implements OnInit, OnDestroy {
         }
       )
     );
+  }
+
+  createForm(): void {
+    this.formAuthor = new FormGroup({
+      authorInput: new FormControl(null, {
+        validators: [Validators.minLength(3)]
+      })
+    });
   }
 
   changePage() {
@@ -118,6 +122,9 @@ export class CommitListComponent implements OnInit, OnDestroy {
   }
 
   private getNumberPages(header: string): Object {
+    if (!header) {
+      return;
+    }
     const pages = header.split(',').reduce((prev, curr) => {
       const match = curr.match(/&page=(.*)>; rel="(\w*)"/);
       const number = Number(match[1]);
@@ -129,6 +136,9 @@ export class CommitListComponent implements OnInit, OnDestroy {
   }
 
   private getLinkPages(header: string): Object {
+    if (!header) {
+      return;
+    }
     const pages = header.split(',').reduce((prev, curr) => {
       const match = curr.match(/<(.*)>; rel="(\w*)"/);
       const url = match[1];
