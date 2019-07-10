@@ -13,6 +13,7 @@
       class="form-control"
       placeholder="Organization"
       aria-label="Organization"
+      (keyup.enter)="onSearch(search.value)"
       #search
     />
     <mat-icon (click)="onSearch(search.value)">search</mat-icon>
