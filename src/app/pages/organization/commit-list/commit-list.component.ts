@@ -7,7 +7,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Branch } from '../../../shared/model/branch.model';
 import { Commit } from '../../../shared/model/commit.model';
 import { ErrorMessages } from '../../../shared/enum/errors.enum';
-import { slideFadeStateTrigger, slideDownStateTrigger } from '../../../shared/animations';
+import { slideFadeStateTrigger } from '../../../shared/animations';
 
 @Component({
   selector: 'app-commit-list',
@@ -45,7 +45,20 @@ export class CommitListComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  searchAuthor(): void {}
+  searchAuthor(): void {
+    const authorName = this.formAuthor.controls.authorInput.value;
+    if (this.commits) {
+      const oldCommits = [...this.commits];
+      this.commits = oldCommits.filter((commit) => {
+        if (commit.author) {
+          return commit.author.login === authorName;
+        }
+      });
+
+    } else {
+      this.snackBarService.open(ErrorMessages.LOAD_COMMITS);
+    }
+  }
 
   initListeners(): void {
     this.subscription.add(
@@ -83,7 +96,7 @@ export class CommitListComponent implements OnInit, OnDestroy {
   createForm(): void {
     this.formAuthor = new FormGroup({
       authorInput: new FormControl(null, {
-        validators: [Validators.minLength(3)]
+        validators: [Validators.minLength(3), Validators.required]
       })
     });
   }

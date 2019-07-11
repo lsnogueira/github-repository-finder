@@ -26,6 +26,9 @@
             formControlName="authorInput"
             [(ngModel)]="value"
           />
+          <mat-error>
+            É obrigatório o preenchimento deste campo
+          </mat-error>
           <button
             mat-button
             *ngIf="value"
