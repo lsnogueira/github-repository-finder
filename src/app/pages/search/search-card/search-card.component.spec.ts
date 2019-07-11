@@ -1,4 +1,3 @@
-import { configureTestSuite } from '../../../config-test/config-test';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -11,8 +10,7 @@ import { SearchCardComponent } from './search-card.component';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
 
-fdescribe('SearchCardComponente configuration', () => {
-  configureTestSuite();
+describe('SearchCardComponente configuration', () => {
 
   beforeAll(done =>
     (async () => {
@@ -93,7 +91,7 @@ fdescribe('SearchCardComponente configuration', () => {
         const snackSpy = spyOn(snackbarService, 'open');
         component.onSearch();
         expect(component.submitted).toBeFalsy();
-        expect(snackSpy).toHaveBeenCalledWith('Organização não encontrada :(');
+        expect(snackSpy).toHaveBeenCalledWith('Organização não encontrada');
       })()
         .then(done)
         .catch(done.fail));

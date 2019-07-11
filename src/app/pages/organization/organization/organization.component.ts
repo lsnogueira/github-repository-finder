@@ -15,7 +15,6 @@ import { ErrorMessages } from '../../../shared/enum/errors.enum';
 export class OrganizationComponent implements OnInit, OnDestroy {
   isPageLoad: boolean;
   org: Organization;
-  repos: Repository;
 
   private subscription = new Subscription();
 
