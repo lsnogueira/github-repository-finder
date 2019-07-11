@@ -1,0 +1,16 @@
+@import 'colors';
+
+.general-loading {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: 
+    url('assets/images/Spin-0.6s-200px.gif')
+    no-repeat
+    50% 50%
+    $gray-background;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+}

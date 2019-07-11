@@ -1,0 +1,41 @@
+@import '../colors';
+
+.title {
+  font-size: 20px;
+  color: $black-github;
+  font-weight: 600;
+  float: left;
+}
+
+i {
+  color: $smallname-github;
+}
+
+mat-panel-title {
+  padding-top: 15px;
+}
+
+mat-panel-description {
+  padding-top: 20px;
+}
+
+.author-input {
+  width: 100%;
+  display: inline-block;
+  font-size: 15px;
+  text-align: right;
+  padding-right: 10px;
+  color: $placeholder;
+}
+
+h3,
+p {
+  color: $text;
+}
+
+@media screen and (max-width: 1024px) {
+  .author-input {
+    font-size: 10px;
+    padding: 0;
+  }
+}

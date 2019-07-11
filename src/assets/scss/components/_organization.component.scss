@@ -1,0 +1,22 @@
+@import '../colors';
+
+.avatar img {
+  border: 1px solid $black-github;
+  padding: 3px;
+}
+
+.smallname {
+  font-size: 0.75em;
+  color: $smallname-github;
+  font-style: italic;
+}
+
+.org-information {
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: $text;
+  font-size: 30px;
+}
+

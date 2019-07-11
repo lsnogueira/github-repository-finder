@@ -1,0 +1,21 @@
+<nav class="navbar navbar-dark bg-dark mb-4">
+  <a class="navbar-brand" [routerLink]="['/search']">
+    <img
+      src="assets/images/GitHub-Mark-Light-120px-plus.png"
+      width="30"
+      height="30"
+      alt=""
+    />
+  </a>
+  <div class="search-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Organization"
+      aria-label="Organization"
+      (keyup.enter)="onSearch(search.value)"
+      #search
+    />
+    <mat-icon (click)="onSearch(search.value)">search</mat-icon>
+  </div>
+</nav>

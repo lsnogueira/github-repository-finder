@@ -1,0 +1,34 @@
+<app-top-nav></app-top-nav>
+<div class="container">
+  <div *ngIf="org" class="row">
+    <div class="col-lg-2 org-information">
+      <div class="avatar">
+        <a [href]="org?.html_url" target="_blank">
+          <img
+            [src]="org?.avatar_url"
+            width="140"
+            height="140"
+            [alt]="org?.login"
+          />
+        </a>
+      </div>
+      <!-- /.avatar -->
+    </div>
+    <!-- /.col-lg-2 org-information -->
+    <div class="col-lg-10">
+      <h2>
+        {{ org?.name }}
+        <span class="smallname">
+          (@<a [href]="org?.html_url" target="_blank">{{ org?.login }} </a>)
+        </span>
+        <!-- ./smallname -->
+      </h2>
+      <p>Repos: {{ org?.public_repos }}</p>
+    </div>
+    <!-- /.col-lg-10 -->
+  </div>
+  <!-- /.row -->
+  <div *ngIf="!isPageLoad" class="general-loading"></div>
+</div>
+<!-- /.container -->
+<router-outlet></router-outlet>

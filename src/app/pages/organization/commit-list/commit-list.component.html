@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row col-12 mb-4">
+    <h3>Commit List:</h3>
+  </div>
+  <!-- /.col-12 mb-4 -->
+  <mat-toolbar>
+    <button mat-button color="primary" [matMenuTriggerFor]="menuBranches">
+      Branches
+    </button>
+    <mat-menu #menuBranches="matMenu">
+      <button
+        *ngFor="let branch of branches"
+        mat-menu-item
+        (click)="changeBranch(branch.name)"
+      >
+        {{ branch?.name }}
+      </button>
+    </mat-menu>
+    <div class="author-input">
+      <form [formGroup]="formAuthor" (ngSubmit)="searchAuthor()">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="author"
+            color="primary"
+            formControlName="authorInput"
+            [(ngModel)]="value"
+          />
+          <mat-error>
+            É obrigatório o preenchimento deste campo
+          </mat-error>
+          <button
+            mat-button
+            *ngIf="value"
+            matSuffix
+            mat-icon-button
+            aria-label="Pesquisar"
+            type="submit"
+          >
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </div>
+    <!-- /.author-input -->
+  </mat-toolbar>
+  <div>
+    <mat-accordion>
+      <mat-expansion-panel
+        *ngFor="let cmt of commits"
+        [@slideFadeState]="commits?.length"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <p class="title">
+              {{
+                cmt.commit.message?.length > titleLength
+                  ? (cmt.commit.message | slice: 0:titleLength) + '...'
+                  : cmt.commit.message
+              }}
+            </p>
+          </mat-panel-title>
+          <mat-panel-description>
+            <div class="text-right w-100">
+              {{ cmt.commit.author?.date | date: 'dd/MM/yyyy' }}
+            </div>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p class="author">
+          Author: <i>{{ cmt.author?.login }}</i>
+        </p>
+        <p class="hash">
+          Hash: <i>{{ cmt.sha }}</i>
+        </p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <mat-paginator
+    [length]="pages?.last ? pages?.last * 30 : 30"
+    [pageSize]="30"
+    (page)="changePage($event)"
+  >
+  </mat-paginator>
+</div>
+<!-- /.container -->
