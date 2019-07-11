@@ -53,18 +53,21 @@ export class SearchCardComponent implements OnInit, OnDestroy {
 
     if (org && !this.submitted) {
       this.submitted = true;
-      this.ghService.getOrganization(org).subscribe(
-        res => {
-          this.router.navigate([`${res.login}`]);
-        },
-        rej => {
-          this.submitted = false;
-          if (rej.status === 404) {
-            this.snackBarService.open(ErrorMessages.NOT_FOUND_ORG);
-            return;
-          }
-          this.snackBarService.open(ErrorMessages.UNEXPECTED_ERROR);
-        }
+      this.subscription.add(
+        this.ghService.getOrganization(org)
+          .subscribe(
+            res => {
+              this.router.navigate([`${res.login}`]);
+            },
+            rej => {
+              this.submitted = false;
+              if (rej.status === 404) {
+                this.snackBarService.open(ErrorMessages.NOT_FOUND_ORG);
+                return;
+              }
+              this.snackBarService.open(ErrorMessages.UNEXPECTED_ERROR);
+            }
+          )
       );
     }
   }

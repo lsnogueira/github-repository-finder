@@ -1,27 +1,37 @@
-# RepositoryFinderNg7
+# GitHub Repository Finder
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.4.
+Projeto criado para encontrar repositórios públicos de uma organização de escolha do usuário. Esta aplicação foi feita em Angular 7.2.4.
 
-## Development server
+## Como iniciar o projeto?
+O projeto segue o padrão do Angular para sua inicialização local.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Pré-requisitos
+Para inicialização do projeto é necessário instalar suas dependências, ou seja, *node_modules*. Para isto, basta iniciar o comando abaixo:
 
-## Code scaffolding
+```
+npm i
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Inicialização
+Para o projeto inicializar localmente basta rodar o comando abaixo.
 
-## Build
+```
+ng s
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Após o processo, o console deve printar *Compiled Successfull*.
 
-## Running unit tests
+## Como rodar os testes?
+Para rodar os teste unitários deste projeto basta executar o comando abaixo.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+ng t --code-coverage
+```
 
-## Running end-to-end tests
+Obs: Caso os testes automatizados estejam em um repositório a parte, coloque o **link aqui.**
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Tecnologias utilizadas
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* [Angular CLI](https://github.com/angular/angular-cli) version 7.2.4.
+* [Angular Material](https://material.angular.io/) version 6.4.7.
+* [Bootstrap](https://getbootstrap.com/) version 4.3.
