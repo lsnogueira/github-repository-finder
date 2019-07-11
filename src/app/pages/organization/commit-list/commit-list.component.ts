@@ -36,7 +36,7 @@ export class CommitListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.repoName = this.activatedRoute.snapshot.params.repo;
-    this.titleLength = 40;
+    this.titleLength = this.isMobile() ? 15 : 40;
     this.createForm();
     this.initListeners();
   }
@@ -160,5 +160,11 @@ export class CommitListComponent implements OnInit, OnDestroy {
       return prev;
     }, {});
     return pages;
+  }
+
+  private isMobile() {
+    return /iPhone|iPad|iPod|Android|BlackBerry|Kindle|KFAPWI|Windows Phone/i.test(
+      navigator.userAgent
+    );
   }
 }
