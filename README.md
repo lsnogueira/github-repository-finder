@@ -28,8 +28,6 @@ Para rodar os teste unitários deste projeto basta executar o comando abaixo.
 ng t --code-coverage
 ```
 
-Obs: Caso os testes automatizados estejam em um repositório a parte, coloque o **link aqui.**
-
 ## Tecnologias utilizadas
 
 * [Angular CLI](https://github.com/angular/angular-cli) version 7.2.4.
